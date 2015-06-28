@@ -1,0 +1,73 @@
+﻿<Window x:Class="Spider.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="608" Width="660" Title="爬图工具" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid  Margin="0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="BurlyWood" Grid.Row="0" BorderThickness="1" HorizontalAlignment="Left" Height="137" Margin="10,5" VerticalAlignment="Top" Width="630" />
+        <Label Content="网址" HorizontalAlignment="Left" Margin="64.459,19.987,0,0" VerticalAlignment="Top" Grid.IsSharedSizeScope="True" />
+        <TextBox HorizontalAlignment="Center" Grid.Row="0"  Margin="125.562,15.824,78.438,0" TextWrapping="Wrap" Text="" Width="450" VerticalAlignment="Top" x:Name="txtUrl" Grid.IsSharedSizeScope="True"/>
+
+        <Label Content="关键词" HorizontalAlignment="Left" Margin="52.459,63.464,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.199,0.259" Grid.IsSharedSizeScope="True"/>
+        <TextBox HorizontalAlignment="Center" Grid.Row="0"  Margin="125.562,59.301,78.438,0" TextWrapping="Wrap" Text="" Width="450" VerticalAlignment="Top" x:Name="txtKeyWord" Grid.IsSharedSizeScope="True"/>
+
+        <Label Content="保存路径" HorizontalAlignment="Left" Margin="40.459,101.545,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.199,0.259" Grid.IsSharedSizeScope="True"/>
+        <TextBox HorizontalAlignment="Center" Grid.Row="0"  Margin="125.562,97.382,78.438,0" TextWrapping="Wrap" Text="" Width="450" VerticalAlignment="Top" x:Name="txtOutputPath" Grid.IsSharedSizeScope="True" />
+        <Button Content="..." HorizontalAlignment="Left" Margin="588,97.382,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.167,-0.229" x:Name="BtnSelectFolderPath" Click="btnSelectFolderPath_Click"/>
+
+        <ListView x:Name="ListDownload" Margin="10,10" Padding="5" Grid.Row="1" MouseDoubleClick="ListDownload_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="图片地址" DisplayMemberBinding="{Binding Url}" Width="315"/>
+                    <GridViewColumn Header="保存路径" DisplayMemberBinding="{Binding ImgPath}" Width="315"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="打开" Click="MenuItemOpen_Click"/>
+                    <MenuItem Header="打开文件夹" Click="MenuItemOpenPath_Click"/>
+                    <Separator />
+                    <MenuItem Header="复制" Click="MenuItemCopy_Click"/>
+                    <MenuItem Header="剪切" Click="MenuItemCut_Click"/>
+                    <MenuItem Header="删除" Click="MenuItemDelete_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="爬虫下载" HorizontalAlignment="Center" Grid.Column="1" x:Name="btnSpiderDownload" Click="btnSpiderDownload_Click" Tag="爬虫下载" />
+            <Button Content="百度下载" HorizontalAlignment="Center" Grid.Column="2" x:Name="btnBaiduDownLoad" Click="btnBaiduDownLoad_Click" Tag="百度下载" />
+            <Button Content="停止下载" HorizontalAlignment="Center" Grid.Column="3" x:Name="btnStop" Click="btnStop_Click"  IsEnabled="False"/>
+            <Button Content="设置" HorizontalAlignment="Center"  Grid.Column="4" x:Name="btnConfig"  Click="BtnConfig_Click"/>
+        </Grid>
+        <StatusBar HorizontalAlignment="Left" Height="25"  Grid.Row="3" VerticalAlignment="Top" Width="660" Name="sbDownload"  >
+            <StatusBarItem>
+                <TextBlock Name="tbProgress" Text="准备就绪"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="10,7"/>
+                <Setter Property="Height" Value="30"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Margin" Value="0,0,10,10" />
+            </Style>
+        </Grid.Resources>
+    </Grid>
+
+</Window>
